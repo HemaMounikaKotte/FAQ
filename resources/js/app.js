@@ -14,10 +14,12 @@ window.Vue = require('vue');
  * Vue components. It will recursively scan this directory for the Vue
  * components and automatically register them with their "basename".
  *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
+ * Eg. ./components/Notification.vue -> <example-component></example-component>
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('notification', require('./components/Notification.vue'));
+
+//Vue.component('home', require('./components/Home.vue'));
 
 // const files = require.context('./', true, /\.vue$/i)
 
@@ -32,5 +34,18 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
  */
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: {
+        notifications: ''
+    },
+    created() {
+        axios.post('/notification/get').then(response => {
+        this.notifications = response.data;
+        });
+        var userId = $('meta[name="userId"]').attr('content');
+        Echo.private('App.User.' + userId).notification((notification) => {
+            this.notifications.push(notification);
+            //console.log(notification);
+        });
+    }
 });
