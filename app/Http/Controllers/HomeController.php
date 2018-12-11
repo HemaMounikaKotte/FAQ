@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +26,13 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $questions = $user->questions()->paginate(6);
-        return view('home')->with('questions', $questions);
+        $posts = Post::orderBy('id', 'desc')->paginate(10);
+        return view('home')->with('questions', $questions)->with('posts', $posts);
     }
+
+//    public function post()
+//    {
+//        $posts = Post::orderBy('id', 'desc')->paginate(10);
+//        return view('home')->withPosts($posts);
+//    }
 }
