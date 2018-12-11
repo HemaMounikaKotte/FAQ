@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Question;
 use Illuminate\Support\Facades\Auth;
+use Session;
+use App\Notifications\NotifyPostOwner;
+use App\Post;
+
 class QuestionController extends Controller
 {
     public function __construct()
@@ -48,6 +52,11 @@ class QuestionController extends Controller
         $question->user()->associate(Auth::user());
         $question->save();
         return redirect()->route('home')->with('message', 'IT WORKS!');
+
+        //$question = Question::find($request->question_id);
+        //$question->user->notify(new NotifyPostOwner($question));
+        //Session::flash('status', 'Question was successfully created');
+        //return redirect()->back();
         // return redirect()->route('questions.show', ['id' => $question->id]);
     }
     /**
