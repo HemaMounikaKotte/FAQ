@@ -10,9 +10,10 @@ To run the FAQ project:
 7. Run: unit tests: phpunit
 8. Run: seeds php artisan migrate:refresh --seed
 
-#EPIC:
- 
- ##Real time push notifications implementation
+# EPIC:
+
+##Real time push notifications implementation
+
 The new feature added to the existing FAQ project is creating real time push notifications without the need to refresh the webpage. Notifying a user that something of interest has happened is one of the first and most fundamental use cases for real-time web technology. Pusher is a hosted service that makes it super-easy to add real-time data and functionality to web and mobile applications.
 I have used Laravel Echo, Pusher js and Vue js, inorder to create real-time notifications feature for the website. Laravel provides support for sending notifications across a variety of delivery channels, including mail, SMS (via Nexmo), and Slack. Notifications may also be stored in a database so they may be displayed in your web interface.
 
