@@ -10,15 +10,41 @@ To run the FAQ project:
 7. Run: unit tests: phpunit
 8. Run: seeds php artisan migrate:refresh --seed
 
+
+****
+##Feature added to existing FAQ project
+
+**The website running on heroku -> http://is601mp3a.herokuapp.com/**
+
 # EPIC:
 
-##Real time push notifications implementation
+### Real time push notifications feature with laravel and pusher implementation
 
 The new feature added to the existing FAQ project is creating real time push notifications without the need to refresh the webpage. Notifying a user that something of interest has happened is one of the first and most fundamental use cases for real-time web technology. Pusher is a hosted service that makes it super-easy to add real-time data and functionality to web and mobile applications.
 I have used Laravel Echo, Pusher js and Vue js, inorder to create real-time notifications feature for the website. Laravel provides support for sending notifications across a variety of delivery channels, including mail, SMS (via Nexmo), and Slack. Notifications may also be stored in a database so they may be displayed in your web interface.
 
 The real-time notifications feature works in such a way that if a user comments under any post, a notification is updated on the website automatically without the need of refreshing the webpage and when a user clicks on the notification bar it shows “someone has commented on a post” and redirects to the post under which that comment is posted. When no comment is posted, the notification bar shows “There is no new notification”. The user can create a post with title limited to atleast 6 characters and content which is limited to atleast 20 characters and will be able to comment under that post. After a post is created, it shows the message “A new post was successfully created” and the user can see all the posts created, in a tabular form where it shows the title and content and the day on which it is created. After clicking on the showpost button, the user can view the post and at first it shows “no comments”. The user can then create a comment and click on “comment” button and will be able to get back to the previous page by clicking on “go back” button. At this stage the user will be able to see that a new notification is updated as the notification bar shows “1” at its place and by clicking on that bar, a dropdown will appear saying that someone has commented on the post and you can click on the notification updated and it will redirect you to the post under which a comment is been posted. This way the feature is very reliable as you don’t need to refresh it every time to check for a new notification update.
+NOTE: Any user after logging in with their credentials, will be able to see all the posts created by other users and themselves, such that they will be able to comment under any post. But, for checking the working the user has to comment under the post created by them, as it notifies the person who have created the post itself not anyone else.
 
+## USER STORIES:
+1.	As a user, I can check a notification from notification bar instantly without refreshing the webpage whenever a comment is submitted under a post.
+2.	As a user, I can click on the notification shown in the dropdown notification bar which redirects to the post under which a comment is submitted.
+3.	As a user, I can create a new post with title and content
+4.	As a user, I can view the post in the post table where all the posts created are listed
+5.	As a user, I can submit a comment under any post listed
+6.  As a user, I can view all the posts created by any user on the homepage
+
+****
+### Guidelines to Website:
+1. Login with your credentials
+2. Create a post with title and content (you can view and comment other posts too, but to check the working you've to create your own post)
+3. View the post and comment under that post
+4. The notification bar notifies you with one notification like this -> Notification(1) 
+5. View the notification by clicking on it
+6. Logout from your account
+
+****
+## Introducing PUSHER
 ###### Getting Started 
 
 Installing the Pusher PHP library:
@@ -44,18 +70,16 @@ When the Laravel application was created a.env file will also have been created 
 Take the Pusher credentials we noted down earlier (app_id, key and secret) - or you may even have a browser tap still open on the App Keys section of your app in the 
 
 Pusher dashboard - and add them to the.env file:
-PUSHER_APP_ID=YOUR_APP_ID
-PUSHER_KEY=YOUR_APP_KEY
-PUSHER_SECRET=YOUR_APP_SECRET
+    `PUSHER_APP_ID=YOUR_APP_ID
+     PUSHER_KEY=YOUR_APP_KEY
+     PUSHER_SECRET=YOUR_APP_SECRET`
 
 Finally, we will configure Echo to use Pusher. We do that by uncommenting and editing the values at the bottom of resources/assets/js/bootstrap.js:
 
-// ./resources/assets/js/bootstrap.js
-
-import Echo from "laravel-echo"
-
- window.Echo = new Echo({
-     broadcaster: 'pusher',
-     key: 'your_pusher_key'
-});
+`// ./resources/assets/js/bootstrap.js
+    import Echo from "laravel-echo"
+    window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'your_pusher_key'
+});`
 
