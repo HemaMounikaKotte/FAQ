@@ -21,4 +21,14 @@ class PostTest extends TestCase
         $post->user()->associate($user);
         $this->assertTrue($post->save());
     }
+    public function testComment()
+    {
+        $post = factory(\App\Post::class)->make();
+        $post->save();
+        $comment = factory(\App\Comment::class)->make();
+        $comment->user()->associate($post);
+        $comments = $post->comments();
+        $this->assertNotNull($comments);
+    }
 }
+

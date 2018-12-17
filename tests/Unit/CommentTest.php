@@ -15,7 +15,7 @@ class CommentTest extends TestCase
      */
     public function testSave()
     {
-        $user = $user = factory(\App\User::class)->make();
+        $user = factory(\App\User::class)->make();
         $user->save();
         $post = factory(\App\Post::class)->make();
         $post->user()->associate($user);
